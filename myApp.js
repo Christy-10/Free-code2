@@ -4,7 +4,7 @@ app.use("/public", express.static(__dirname + "/public"));
 let absolutePath = __dirname + "/views/index.html";
 app.get("/",(req,res) => {
     res.sendFile(absolutePath)
-    var response = "Hello World".toUpperCase();
+    
 
 })
 if (process.env.VAR_NAME === "allCaps") {
@@ -13,8 +13,20 @@ if (process.env.VAR_NAME === "allCaps") {
   response = "Hello World";
 }
 app.get("/json", (req,res) => {
-    res.json({message:"Hello json"})
-})
+    if(process.env.MESSAGE_STYLE==="uppercase")
+    {
+        res.json({
+            "message":"HELLO JSON"})
+        }
+        
+        else{
+            res.json({"message":"Hello json"})
+
+        }
+    
+    });
+
+
 
 
 console.log("Hello World");
