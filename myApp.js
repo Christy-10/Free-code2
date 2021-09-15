@@ -6,6 +6,11 @@ app.get("/",(req,res) => {
     res.sendFile(absolutePath)
 
 })
+if (process.env.VAR_NAME === "allCaps") {
+    response = "Hello World".toUpperCase();
+  } else {
+    response = "Hello World";
+  }
 app.get("/json", (req,res) => {
     res.json({message:"Hello json"})
 })
