@@ -2,12 +2,10 @@ var express = require('express');
 var app = express();
 app.use("/public", express.static(__dirname + "/public"));
 let absolutePath = __dirname + "/views/index.html";
-app.get("/",(req,res) => {
-    let {method,path,ip }=req;
-    console.log(method +" " + path + "-" +ip)
-    next();
-})
+app.use(function middleware(req, res, next) {
     
+    next();
+  });
 
 if (process.env.VAR_NAME === "allCaps") {
   response = "Hello World".toUpperCase();
