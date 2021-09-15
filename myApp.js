@@ -2,11 +2,7 @@ var express = require('express');
 var app = express();
 app.use("/public", express.static(__dirname + "/public"));
 let absolutePath = __dirname + "/views/index.html";
-  app.use(function middleware(req,res,next) 
-  {
-      console.log(req.method + " "+ req.path + "-"+req.ip);
-      next();
-  });
+  
 
 if (process.env.VAR_NAME === "allCaps") {
   response = "Hello World".toUpperCase();
@@ -26,8 +22,26 @@ app.get("/json", (req,res) => {
         }
     
     });
+    app.get(
+        "/now",
+        (req, res, next) => {
+          // adding a new property to req object
+          // in the middleware function
+          req.string = "example";
+          next();
+        },
+        (req, res) => {
+          // accessing the newly added property
+          // in the main function
+          res.send(req.string);
+        }
+      );
 
-
+    app.use(function middleware(req,res,next) 
+    {
+        console.log(req.method + " "+ req.path + " - "+ req.ip);
+        next();
+    });
 
 
 console.log("Hello World");
