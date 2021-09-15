@@ -4,8 +4,7 @@ app.use("/public", express.static(__dirname + "/public"));
 let absolutePath = __dirname + "/views/index.html";
 app.get("/",(req,res) => {
     res.sendFile(absolutePath)
-    let {method,path,ip}=req;
-    console.log(method+" "+path+"-"+ip)
+    var string = req.method + " " + req.path + " - " + req.ip;
     next();
 
 })
