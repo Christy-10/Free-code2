@@ -4,9 +4,12 @@ app.use("/public", express.static(__dirname + "/public"));
 let absolutePath = __dirname + "/views/index.html";
 app.get("/",(req,res) => {
     res.sendFile(absolutePath)
-    
+    let {method,path,ip}=req;
+    console.log(method+" "+path+"-"+ip)
+    next();
 
 })
+
 if (process.env.VAR_NAME === "allCaps") {
   response = "Hello World".toUpperCase();
 } else {
