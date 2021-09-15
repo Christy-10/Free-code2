@@ -12,7 +12,7 @@ if (process.env.VAR_NAME === "allCaps") {
     response = "Hello World";
   }
 app.get("/json", (req,res) => {
-    res.json({message:"Hello json"})
+    res.json({"message": process.env.MESSAGE_STYLE=="uppercase" ? "HELLO JSON": "Hello json"})
 })
 
 
