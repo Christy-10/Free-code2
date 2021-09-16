@@ -22,18 +22,27 @@ app.get("/json", (req,res) => {
         }
     
     });
-    app.get(
-        "/now",
-        (req, res, next) => {
+    app.get("/now",function(req, res, next)  {
           // adding a new property to req object
           // in the middleware function
           req.string = "example";
           next();
-        },
-        (req, res) => {
+        },function(req, res)  {
           // accessing the newly added property
           // in the main function
           res.send(req.string);
+        }
+      );
+      app.get(
+        "/now",
+        (req, res, next) => {
+          req.time = new Date().toString();
+          next();
+        },
+        (req, res) => {
+          res.send({
+            time: req.time
+          });
         }
       );
 
