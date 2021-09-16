@@ -41,7 +41,7 @@ app.get("/json", (req,res) => {
       );
       app.use(bodyParser.urlencoded({extended:false}));
       app.use(bodyParser.json());
-      /*app.get("/name", function(req, res) {
+      app.get("/name", function(req, res) {
         var firstName = req.query.first;
         var lastName = req.query.last;
         
@@ -49,8 +49,8 @@ app.get("/json", (req,res) => {
 
         res.json({
           name: `${firstName} ${lastName}`
-        });*/
-      });
+        });
+      
       app.get("/:word/echo",(req,res)=>
       {
           res.json({echo:req.params.word});
