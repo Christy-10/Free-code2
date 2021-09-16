@@ -33,22 +33,23 @@ app.get("/json", (req,res) => {
           res.send(req.string);
         }
       );
-      function getTheCurrentTimeString()
-      {
-          return new Date().toString();
-      }
-      app.get("/now",function(req, res, next)  {
-          req.time = getTheCurrentTimeString();
-          next();
-        },function(req, res)  {
-          res.json({ time: req.time});
-        });
+      
 
     app.use(function middleware(req,res,next) 
     {
         console.log(req.method + " "+ req.path + " - "+ req.ip);
         next();
     });
+    const middleware = (req, res, next) => {
+        req.time = new Date().toString();
+        next();
+      };
+      
+      app.get("/now", middleware, (req, res) => {
+        res.send({
+          time: req.time
+        });
+      });
 
 
 console.log("Hello World");
