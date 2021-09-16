@@ -33,18 +33,16 @@ app.get("/json", (req,res) => {
           res.send(req.string);
         }
       );
-      app.get(
-        "/now",
-        (req, res, next) => {
-          req.time = new Date().toString();
+      function getTheCurrentTimeString()
+      {
+          return new Date().toString();
+      }
+      app.get("/now",function(req, res, next)  {
+          req.time = getTheCurrentTimeString();
           next();
-        },
-        (req, res) => {
-          res.send({
-            time: req.time
-          });
-        }
-      );
+        },function(req, res)  {
+          res.json({ time: req.time});
+        });
 
     app.use(function middleware(req,res,next) 
     {
