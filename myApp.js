@@ -22,34 +22,25 @@ app.get("/json", (req,res) => {
         }
     
     });
-    app.get("/now",function(req, res, next)  {
+    app.get("/now",(req, res, next) => {
           // adding a new property to req object
           // in the middleware function
-          req.string = "example";
+          req.time=  new Date().toString();
           next();
-        },function(req, res)  {
+        },(req, res) =>  {
           // accessing the newly added property
           // in the main function
-          res.send(req.string);
+          res.send({time: req.time});
         }
       );
-      
-
-    app.use(function middleware(req,res,next) 
+      app.use(function middleware(req,res,next) 
     {
         console.log(req.method + " "+ req.path + " - "+ req.ip);
         next();
     });
-    const middleware = (req, res, next) => {
-        req.time = new Date().toString();
-        next();
-      };
-      
-      app.get("/now", middleware, (req, res) => {
-        res.send({
-          time: req.time
-        });
-      });
+
+    
+    
 
 
 console.log("Hello World");
