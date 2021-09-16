@@ -23,16 +23,18 @@ app.get("/json", (req,res) => {
     
     });
     app.get("/now",(req, res, next) => {
-          // adding a new property to req object
-          // in the middleware function
+          
           req.time=  new Date().toString();
           next();
         },(req, res) =>  {
-          // accessing the newly added property
-          // in the main function
+          
           res.send({time: req.time});
         }
       );
+      app.get("/:word/echo",(req,res)=>
+      {
+          res.json({echo:req.params.word});
+      });
       app.use(function middleware(req,res,next) 
     {
         console.log(req.method + " "+ req.path + " - "+ req.ip);
