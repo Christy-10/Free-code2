@@ -31,6 +31,10 @@ app.get("/json", (req,res) => {
           res.send({time: req.time});
         }
       );
+      app.get("/name",(req,res)=>
+      {
+          res.json({echo: req.query.first + " " + req.query.last});
+      });
       app.get("/:word/echo",(req,res)=>
       {
           res.json({echo:req.params.word});
