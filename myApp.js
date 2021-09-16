@@ -23,7 +23,6 @@ app.get("/json", (req,res) => {
     
     });
     
-    
 
     
     app.get("/now",(req, res, next) => {
@@ -47,14 +46,14 @@ app.get("/json", (req,res) => {
           name: `${firstName} ${lastName}`
         });
       });
-      app.post("/name", (req, res) =>{
-        
-        
-        res.json({ name: req.body.first + " " +req.body.last });
-      
       app.get("/:word/echo",(req,res)=>
       {
           res.json({echo:req.params.word});
+      });
+      app.post("/name", function(req, res) {
+        // Handle the data in the request
+        var string = req.body.first + " " + req.body.last;
+        res.json({ name: string });
       });
       
 
