@@ -1,9 +1,9 @@
 var express = require('express');
-let  bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 var app = express();
 app.use("/public", express.static(__dirname + "/public"));
 let absolutePath = __dirname + "/views/index.html";
-app.use(bodyParse.urlencoded({extended:false}));
+
 if (process.env.VAR_NAME === "allCaps") {
   response = "Hello World".toUpperCase();
 } else {
@@ -22,6 +22,11 @@ app.get("/json", (req,res) => {
         }
     
     });
+    app.post("/name", function(req, res) {
+        // Handle the data in the request
+        var string = req.body.first + " " + req.body.last;
+        res.json({ name: string });
+      });
     
 
     
@@ -34,6 +39,8 @@ app.get("/json", (req,res) => {
           res.send({time: req.time});
         }
       );
+      app.use(bodyParser.urlencoded({extended:false}));
+      app.use(bodyParser.json());
       app.get("/name", function(req, res) {
         var firstName = req.query.first;
         var lastName = req.query.last;
@@ -48,11 +55,7 @@ app.get("/json", (req,res) => {
       {
           res.json({echo:req.params.word});
       });
-      app.use(function middleware(req,res,next) 
-    {
-        console.log(req.method + " "+ req.path + " - "+ req.ip);
-        next();
-    });
+      
 
     
     
