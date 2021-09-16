@@ -1,9 +1,9 @@
 var express = require('express');
+let  bodyParser = require('body-parser');
 var app = express();
 app.use("/public", express.static(__dirname + "/public"));
 let absolutePath = __dirname + "/views/index.html";
-  
-
+app.use(bodyParse.urlencoded({extended:false}));
 if (process.env.VAR_NAME === "allCaps") {
   response = "Hello World".toUpperCase();
 } else {
@@ -22,6 +22,9 @@ app.get("/json", (req,res) => {
         }
     
     });
+    
+
+    
     app.get("/now",(req, res, next) => {
           
           req.time=  new Date().toString();
